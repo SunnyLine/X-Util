@@ -8,6 +8,5 @@ package com.pullein.common.listener;
  * Description:有一个参数回调
  */
 public interface OneParameterListener<T> {
-
     void onResult(T t);
 }
