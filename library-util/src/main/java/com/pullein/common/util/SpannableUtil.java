@@ -21,11 +21,15 @@ import java.util.List;
 public class SpannableUtil {
     private List<TextInfo> list = new ArrayList<>();
 
+    public SpannableUtil addText(String text){
+        return addText(text,-1);
+    }
+
     public SpannableUtil addText(String text, @ColorInt int colorId) {
         return addText(text, colorId, 0);
     }
 
-    public SpannableUtil addText(String text, @ColorInt int colorId,int textSizePx) {
+    public SpannableUtil addText(String text, @ColorInt int colorId, int textSizePx) {
         TextInfo textInfo = new TextInfo();
         textInfo.text = text;
         textInfo.colorId = colorId;
@@ -45,7 +49,9 @@ public class SpannableUtil {
                 continue;
             }
             stringBuilder.append(textInfo.text);
-            stringBuilder.setSpan(new ForegroundColorSpan(textInfo.colorId), sb.length(), sb.length() + textInfo.text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (textInfo.colorId != -1) {
+                stringBuilder.setSpan(new ForegroundColorSpan(textInfo.colorId), sb.length(), sb.length() + textInfo.text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
             if (textInfo.textSize > 0) {
                 stringBuilder.setSpan(new AbsoluteSizeSpan(textInfo.textSize), sb.length(), sb.length() + textInfo.text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
