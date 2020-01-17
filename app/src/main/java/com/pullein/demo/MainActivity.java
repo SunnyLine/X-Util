@@ -17,4 +17,8 @@ public class MainActivity extends AppCompatActivity {
     public void toSignature(View view) {
         startActivity(new Intent(this, SignatureActivity.class));
     }
+
+    public void toIndicator(View view) {
+        startActivity(new Intent(this, IndicatorActivity.class));
+    }
 }

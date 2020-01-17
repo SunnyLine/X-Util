@@ -7,12 +7,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.pullein.common.util.DensityUtil;
 import com.pullein.common.util.HandlerUtil;
 import com.pullein.common.util.ThreadUtils;
 
@@ -78,7 +78,7 @@ public class SignatureView extends View {
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         isDown = false;
-        setStrokeRange(1, 20);
+        setStrokeRange(4, 20);
         mPoint = new ArrayList<>();
         lastVelocity = 0;
         buildCount.set(0);
@@ -129,29 +129,17 @@ public class SignatureView extends View {
         }
     }
 
-    public void setStrokeRange(float min, float max) {
+    public void setStrokeRange(int min, int max) {
         if (min < 1 || max < 1 || max < min) {
             throw new IllegalArgumentException("error stroke range");
         }
         minStroke = min;
         maxStroke = max;
-        maxStroke = dp2px(max);
-        minStroke = dp2px(min);
+        maxStroke = DensityUtil.dip2px(getContext(), max);
+        minStroke = DensityUtil.dip2px(getContext(), min);
         // vMax = (max - min) * 0.1f + min;
         vMax = (maxStroke - minStroke) * 0.1f + min;
         minStroke = min;
-    }
-
-    /**
-     * 返回dp到px的转换值
-     *
-     * @param dpValue
-     * @return int px
-     */
-    public int dp2px(float dpValue) {
-        float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpValue, getResources().getDisplayMetrics());
-        return (int) (v + 0.5f);
     }
 
     @Override
