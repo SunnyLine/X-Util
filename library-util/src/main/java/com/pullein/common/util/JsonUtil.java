@@ -29,7 +29,7 @@ public class JsonUtil {
         return result;
     }
 
-    public static <T> T fromJson(String string, Class<T> t) {
+    public static <T> T toBean(String string, Class<T> t) {
         T result = null;
         try {
             result = new Gson().fromJson(string, t);
@@ -39,7 +39,7 @@ public class JsonUtil {
         return result;
     }
 
-    public static <T> T fromJson(JsonElement json, Class<T> t) {
+    public static <T> T toBean(JsonElement json, Class<T> t) {
         T result = null;
         try {
             result = new Gson().fromJson(json, t);
@@ -49,7 +49,7 @@ public class JsonUtil {
         return result;
     }
 
-    public static <T> T fromJson(String string, Type t) {
+    public static <T> T toBean(String string, Type t) {
         T result = null;
         try {
             result = new Gson().fromJson(string, t);
@@ -59,7 +59,7 @@ public class JsonUtil {
         return result;
     }
 
-    public static <T> ArrayList<T> fromJson2List(JsonArray array, Class<T> cls) {
+    public static <T> ArrayList<T> toList(JsonArray array, Class<T> cls) {
         ArrayList<T> list = new ArrayList<>();
         try {
             for (final JsonElement json : array) {
@@ -72,11 +72,11 @@ public class JsonUtil {
         return list;
     }
 
-    public static <T> ArrayList<T> fromJson2List(String array, Class<T> cls) {
+    public static <T> ArrayList<T> toList(String array, Class<T> cls) {
         ArrayList<T> list = new ArrayList<>();
         try {
             JsonArray jsonElements = JsonParser.parseString(array).getAsJsonArray();
-            list.addAll(fromJson2List(jsonElements, cls));
+            list.addAll(toList(jsonElements, cls));
         } catch (Exception e) {
             e.printStackTrace();
         }
