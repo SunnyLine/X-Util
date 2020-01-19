@@ -130,6 +130,15 @@ public class AppUtil {
     }
 
     /**
+     * 打开通知设置页面
+     *
+     * @param context
+     */
+    public static void openNotificationsPermissionSetting(Context context) {
+        NotificationsUtil.requestNotifyPermission(context);
+    }
+
+    /**
      * 打开某应用的详情页面
      */
     public static void openAppInfo(Context context, String packageName) {
@@ -157,14 +166,27 @@ public class AppUtil {
         context.startActivity(it);
     }
 
+    /**
+     * 直接拨打电话，需要权限<br>
+     * 需要权限：android.permission.CALL_PHONE
+     */
+    @SuppressLint("MissingPermission")
     public static void call(Context context, String phone) {
-        call(context, phone, false);
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        Uri url = Uri.parse("tel:" + phone);
+        intent.setData(url);
+        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
-    @SuppressLint("MissingPermission")
-    public static void call(Context context, String phone, boolean isDirectCall) {
-        Intent intent;
-        intent = new Intent(isDirectCall ? Intent.ACTION_CALL : Intent.ACTION_DIAL);
+    /**
+     * 打开系统拨号盘
+     *
+     * @param context
+     * @param phone
+     */
+    public static void dial(Context context, String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
         Uri url = Uri.parse("tel:" + phone);
         intent.setData(url);
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
