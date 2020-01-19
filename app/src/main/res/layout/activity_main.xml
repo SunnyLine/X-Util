@@ -30,4 +30,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignatureView" />
+
+    <Button
+        android:id="@+id/btnJsonParse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="toJsonParse"
+        android:text="Json 相互转换"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIndicatorView" />
+
+    <Button
+        android:id="@+id/btnDensityAndString"
+        android:layout_width="0dp"
+        android:onClick="toDensityAndString"
+        android:layout_height="wrap_content"
+        android:text="分辨率和字符串"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnJsonParse" />
 </androidx.constraintlayout.widget.ConstraintLayout>

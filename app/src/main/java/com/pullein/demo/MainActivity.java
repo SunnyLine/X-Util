@@ -21,4 +21,12 @@ public class MainActivity extends AppCompatActivity {
     public void toIndicator(View view) {
         startActivity(new Intent(this, IndicatorActivity.class));
     }
+
+    public void toJsonParse(View view) {
+        startActivity(new Intent(this, JsonActivity.class));
+    }
+
+    public void toDensityAndString(View view) {
+        startActivity(new Intent(this, DensityActivity.class));
+    }
 }
