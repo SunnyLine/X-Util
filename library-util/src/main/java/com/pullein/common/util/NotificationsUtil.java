@@ -1,4 +1,4 @@
-package com.pullein.common.android;
+package com.pullein.common.util;
 
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;
