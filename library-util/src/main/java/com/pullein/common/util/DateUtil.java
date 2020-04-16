@@ -3,11 +3,14 @@ package com.pullein.common.util;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+
+import static java.math.BigDecimal.ROUND_DOWN;
 
 /**
  * X-Util<br>
@@ -122,7 +125,28 @@ public class DateUtil {
     }
 
     /**
+     * 计算两个时间戳之间间隔的自然日
+     */
+    public static int calcDiffNaturalDay(long time1, long time2) {
+        return calcDiffNaturalDay(time1, time2, GMT_8);
+    }
+
+    /**
+     * 计算两个时间戳之间间隔的自然日
+     */
+    public static int calcDiffNaturalDay(long time1, long time2, String timeZone) {
+        String date1 = format2GMT(time1, PATTERN_YMD, timeZone);
+        String date2 = format2GMT(time2, PATTERN_YMD, timeZone);
+        BigDecimal bigDecimal1 = new BigDecimal(format2UTC(date1, PATTERN_YMD, timeZone));
+        BigDecimal bigDecimal2 = new BigDecimal(format2UTC(date2, PATTERN_YMD, timeZone));
+        BigDecimal oneDay = new BigDecimal(ONE_DAY);
+        int diff = bigDecimal1.subtract(bigDecimal2).divide(oneDay, 0, ROUND_DOWN).intValue();
+        return diff;
+    }
+
+    /**
      * 比较两个时间大小
+     *
      * @return 1 即 date1 > date2;-1 即 date1 < date2 ; 0 即 date1 == date2
      */
     public static int compareDate(Date date1, Date date2) {
