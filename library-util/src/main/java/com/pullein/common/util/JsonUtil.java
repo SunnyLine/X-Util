@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -37,6 +38,12 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static <T> T toBean(String json,T t){
+        Type type =  ((ParameterizedType) t.getClass()
+                .getGenericInterfaces()[0]).getActualTypeArguments()[0];
+        return toBean(json,type);
     }
 
     public static <T> T toBean(JsonElement json, Class<T> t) {
