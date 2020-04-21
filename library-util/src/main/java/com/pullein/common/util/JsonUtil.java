@@ -56,6 +56,13 @@ public class JsonUtil {
         return result;
     }
 
+    /**
+     *
+     * @param string
+     * @param t {{@link com.google.gson.reflect.TypeToken}}
+     * @param <T>
+     * @return
+     */
     public static <T> T toBean(String string, Type t) {
         T result = null;
         try {
